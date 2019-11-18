@@ -1,0 +1,1400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+  <HEAD>
+    
+    <style type="text/css">
+      a { text-decoration: none; }
+	.bordergc {background-color: #6699CC;}
+	.bordergd {background-color: #B6C7E5;}
+	.borderge {background-color: #EEF3FB;}
+	.bordergf {background-color: #FFFFFF;}
+	.bordergg {background-color: #CCCCCC;}
+      .small8b { font-size:8pt;
+                font-family: ariel,helvetica,sans-serif;
+                color:#6633cc;
+              }
+      .small8db { font-size:8pt;
+                font-family: ariel,helvetica,sans-serif;
+                color:#4411aa;
+              }
+
+    </style>
+    <META http-equiv="Content-Type"
+      content="text/html; charset=UTF-8">
+    <META name="keywords"
+      CONTENT="NCBI GEO Gene Expression Omnibus microarray oligonucleotide array SAGE">
+    <META name="description"
+      content="NCBI's Gene Expression Omnibus (GEO) is a public archive and resource for gene expression data.">
+<meta name="ncbi_phid" content="0C42380DD693BFF10000000000000001">
+<meta name="ncbi_sessionid" content="0C42380DD693BFF1_0000SID">
+
+    <TITLE>
+    GEO Accession viewer
+    </TITLE>
+    <link rel="stylesheet"
+      href="/corehtml/ncbi.css">
+    <!-- GEO_SCRIPT -->
+
+<SCRIPT LANGUAGE="JavaScript1.2"
+SRC="/coreweb/javascript/imagemouseover.js"></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript1.2"
+SRC="/coreweb/javascript/show_message.js"></SCRIPT>
+
+<script type="text/javascript" src="/corehtml/jsutils/utils.1.js"></script>
+
+<script type="text/javascript" src="/corehtml/jsutils/remote_data_provider.1.js"></script>
+
+<SCRIPT LANGUAGE="JavaScript1.2"
+SRC="/geo/js/help_def_messages.js"></SCRIPT>
+
+
+
+<LINK  rel = STYLESHEET href = "../info/geo_style.css" Type  = "text/css" >
+<link rel="stylesheet" type="text/css" href="acc.css" />
+  <script language="Javascript">
+
+  function OnFormFieldChange()
+  {
+    var view = document.getElementById("view");
+
+    if(document.getElementById("ViewOptions").form.value == 'html')
+    {
+        view.remove(3);
+        view.remove(2);
+    }
+    else
+    {
+        var NewOption = document.createElement("OPTION");
+
+        NewOption.text = "Full";
+        NewOption.value = "full";
+
+        try
+        {
+            view.add(NewOption, null);
+        }
+        catch(ex)
+        {
+            view.add(NewOption);
+        }
+
+        NewOption = document.createElement("OPTION");
+
+        NewOption.text = "Data";
+        NewOption.value = "data";
+
+        try
+        {
+            view.add(NewOption, null);
+        }
+        catch(ex)
+        {
+            view.add(NewOption);
+        }
+    }
+  }
+
+  function SubmitViewOptionsForm()
+  {
+	var form = document.forms.ViewOptions;
+    if(form.form.value == 'html')
+    {
+		form.form.setAttribute('disabled','disabled');
+		if (form.view.value == 'quick') {
+			form.view.setAttribute('disabled','disabled');
+		}
+		if (form.targ.value == 'self') {
+			form.targ.setAttribute('disabled','disabled');
+		}
+        var token = document.getElementById("token_input");
+        if (token) {
+            form.token.value = token.value;
+        } else {
+            form.token.setAttribute('disabled','disabled');
+        }
+        form.submit();
+    }
+    else
+    {
+        window.open("acc.cgi?acc=" + form.acc.value + "&targ=" + form.targ.value +
+                  "&form=" + form.form.value + "&view=" + form.view.value, "_self");
+    }
+
+    return false;
+  }
+  
+  function ViewOptionsFormKeyDown(event)
+  {
+	if (event == undefined)
+	{    
+		event = window.event;
+	}
+	if (event.keyCode == 13)
+	{
+		SubmitViewOptionsForm();
+		return false;
+	}
+  };
+
+  function OpenFTP(url)
+  {
+    window.open(url, '_blank');
+  }
+
+  function OpenLink(url, where)
+  {
+    window.open(url, where);
+  }
+
+  utils.addEvent(window, "load", OnFormFieldChange)
+  </script>
+
+</head>
+<body background="/coreweb/template1/pix/bg_main3.gif" topmargin="20" marginheight="20">
+
+
+<script type="text/javascript" src="/core/jig/1.15.0/js/jig.min.js"></script>
+<script type="text/javascript" src="/corehtml/pmc/granthub/v0/granthubsearch.min.js"></script>
+<script type="text/javascript" src="/geo/js/dd_menu.js"></script>
+<!-- Global alerts -->
+<script type="text/javascript">
+    jQuery.getScript("/core/alerts/alerts.js", function () {
+        galert(['#galerts_table','body > *:nth-child(1)'])
+    });
+</script>
+	<table width="740" border="0" cellspacing="0" cellpadding="0" align="center" >
+			<tr>
+				<td>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+						<tr>
+							<td><a href="/"><img src="/geo/img/ncbi_logo.gif" alt="NCBI Logo" width="145" height="66" border="0"></a></td>
+							<td width="100%" align="center" valign="middle" nowrap background="/coreweb/template1/pix/top_bg_white.gif"><img src="/coreweb/template1/pix/pixel.gif" width="550" height="1" alt="" border="0"><br>
+								<a href="/geo/"><img src="/geo/img/geo_main.gif" alt="GEO Logo" border="0"></a>
+							</td>
+							<td align="right" background="/coreweb/template1/pix/top_bg_white.gif"><img src="/coreweb/template1/pix/top_right.gif" alt="" width="5" height="66" border="0"></td>
+						</tr>
+					</table>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+						<tr>
+							<td><img src="/coreweb/template1/pix/top2_left.gif" width="601" height="2" alt="" border="0"></td>
+							<td width="100%" background="/coreweb/template1/pix/top2_mid_bg.gif"><img src="/coreweb/template1/pix/pixel.gif" width="1" height="1" alt="" border="0"></td>
+							<td align="right"><img src="/coreweb/template1/pix/top2_right.gif" alt="" width="14" height="2" border="0"></td>
+						</tr>
+					</table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" id="galerts_table"/>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+						<tr>
+							<td><img src="/coreweb/template1/pix/top3_ulm_no_a.gif" width="145" height="16" alt="" border="0" usemap="#unlmenu" name="unl_menu_pix"></td>
+							<td background="/coreweb/template1/pix/top3_mainmenu_mid_bg.gif"><img src="/coreweb/template1/pix/top3_mainmenu_left.gif" width="3" height="16" alt="" border="0"></td>
+							<td width="100%" valign="middle" nowrap background="/coreweb/template1/pix/top3_mainmenu_mid_bg.gif">
+
+					<!-- GEO Navigation -->
+			<ul id="geo_nav_bar">
+				<li><a href="#">GEO Publications</a>
+					<ul class="sublist">
+						<li><a href="/geo/info/GEOHandoutFinal.pdf">Handout</a></li>
+						<li><a href="http://nar.oxfordjournals.org/content/41/D1/D991.full">NAR 2013 (latest)</a></li>
+						<li><a href="http://nar.oupjournals.org/cgi/content/full/30/1/207?ijkey=oxMPOWseARs7o&amp;keytype=ref&amp;siteid=nar">NAR 2002 (original)</a></li>
+						<li><a href="/pmc/3531084,3341798,3013736,2686538,2270403,1669752,1619900,1619899,539976,99122">All publications</a></li>
+					</ul>
+				</li>
+				<li><a href="/geo/info/faq.html">FAQ</a></li>
+				<li><a href="/geo/info/MIAME.html" title="Minimum Information About a Microarray Experiment">MIAME</a></li>
+				<li><a href="mailto:geo@ncbi.nlm.nih.gov">Email GEO</a></li>
+			</ul>
+			<!-- END GEO Navigation -->
+
+                    </td>
+                    <td background="/coreweb/template1/pix/top3_mainmenu_mid_bg.gif" align="right"><img src="/coreweb/template1/pix/top3_mainmenu_right.gif" width="5" height="16" alt="" border="0"></td>
+                </tr>
+            </table>
+            
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td><img src="/coreweb/template1/pix/top4_ulm_left.gif" width="145" height="4" alt="" border="0"></td>
+                    <td width="100%" background="/coreweb/template1/pix/top4_mid_bg.gif"><img src="/coreweb/template1/pix/pixel.gif" width="1" height="1" alt="" border="0"></td>
+                    <td align="right" background="/coreweb/template1/pix/top4_mid_bg.gif"><img src="/coreweb/template1/pix/top4_ulm_right.gif" width="5" height="4" alt="" border="0"></td>
+                </tr>
+            </table>
+    
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td width=1 background="/coreweb/template1/pix/main_left_bg.gif"><img src="/coreweb/template1/pix/main_left_bg.gif" alt="" width="4" height="3" border="0"></td>
+                    <td width="10000" bgcolor="#F0F8FF">
+                        <table cellpadding="0" cellspacing="0" width="100%"><tr><td><font class="Top_Navigation_text" color="#2F6E87" face="Verdana" size="+1">&nbsp;&nbsp;&nbsp;<a href="/">NCBI</a> &gt; <a href="/geo"><font color="">GEO</font></a> &gt; <a href="acc.cgi"><b>Accession Display</b></a><a href="javascript:RPopUpWindow_Set(geologinbar_location,260,120,'','','#E1EAE6','','#538AA9','MessageBox2');" onmouseout="RPopUpWindow_Stop()"><img alt="Help" height="11" src="/coreweb/images/long_help4.gif" style="border: none" width="19"></a></font></td>
+<td align="right">Not logged in | <a href="/geo/submitter?ix=1DItAy-t6Y-Fqjqjwgr_g4oIUjkzsyDrDEK60deCpuNgPxNXA6--AC3hH_birisLXsUxtnugUlYS_mdZasnA9">Login</a><a href="javascript:RPopUpWindow_Set(geologinbar_login,260,200,'','','#E1EAE6','','#538AA9','MessageBox2');" onmouseout="RPopUpWindow_Stop()"><img alt="Help" height="11" src="/coreweb/images/long_help4.gif" style="border: none" width="19"></a></td>
+</tr></table>
+                    </td>
+                    <td width=1 background="/coreweb/template1/pix/main_right_bg.gif"><img src="/coreweb/template1/pix/main_right_bg.gif" width="4" height="3" alt="" border="0"></td>
+                </tr>
+                <tr>
+                    <td background="/coreweb/template1/pix/main_left_bg.gif"><img src="/coreweb/template1/pix/main_left_bg.gif" width="4" height="1" alt="" border="0"></td>
+                    <td width="10000" bgcolor="#E0EEEE"><img src="/coreweb/template1/pix/pixel.gif" width="1" height="1" alt="" border="0"></td>
+                    <td align="right" background="/coreweb/template1/pix/main_right_bg.gif"><img src="/coreweb/template1/pix/main_right_bg.gif" alt="" width="4" height="1" border="0"></td>
+                </tr>
+
+                <tr>
+                    <td background="/coreweb/template1/pix/main_left_bg.gif"><img src="/coreweb/template1/pix/main_left_bg.gif" width="4" height="3" alt="" border="0"></td>
+                    <td width="100%" bgcolor="White">
+                        <table width="98%" border="0" align="center">
+                            <tr>
+                                <td>
+                                    <table border="0" cellspacing="0" cellpadding="0" align="right" width="100%">
+                                        <tr>
+                                            <td>
+
+ <script type="text/javascript" src="acc.js"></script>
+ <span id="msg_err" style="color:red"></span>
+ <span id="msg_info" style="color:blue"></span>
+<table cellpadding="0" cellspacing="0" style="border: 1px solid #C0F8FF"><tr><td><img alt=" " height="35" src="/coreweb/template1/pix/pixel.gif" width="1"></td>
+<td bgcolor="#F0F8FF" width="100%"><font color="#0066CC" face="Arial" size="1"><div id="HelpMessage" style="font: 11px/11px arial, sans-serif"><strong>GEO help:</strong> Mouse over screen elements for information.</div></font></td>
+</tr></table>
+<form action="acc.cgi" enctype="application/x-www-form-urlencoded" id="ViewOptions" method="POST" name="ViewOptions" target="_self"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td></td>
+<td bgcolor="#CCCCCC" nowrap valign="middle" width="100%"><table align="left" border="0" cellpadding="0" cellspacing="0"><tr><td nowrap><table border="0" cellpadding="0" cellspacing="0"><tr><td valign="middle"><input id="token" name="token" type="hidden" value=""><label for="scope">Scope: </label><select id="scope" name="targ" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_scope)" style="font-size: 10px"><option selected value="self">Self</option>
+<option value="gpl">Platform</option>
+<option value="gsm">Samples</option>
+<option value="gse">Series</option>
+<option value="all">Family</option>
+</select>
+&nbsp;&nbsp;<label for="form">Format: </label><select id="form" name="form" onchange="OnFormFieldChange()" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_format)" style="font-size: 10px"><option value="html">HTML</option>
+<option value="text">SOFT</option>
+<option value="xml">MINiML</option>
+</select>
+&nbsp;&nbsp;<label for="view">Amount: </label><select id="view" name="view" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_amount)" style="font-size: 10px"><option value="brief">Brief</option>
+<option selected value="quick">Quick</option>
+</select>
+&nbsp;<label for="geo_acc">GEO accession: </label><input id="geo_acc" name="acc" onkeydown="ViewOptionsFormKeyDown(event)" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_acc)" style="font-size: 10px" type="text" value="GSE113405">&nbsp;&nbsp;</td>
+<td valign="middle"><img alt="Go" border="0" onclick="SubmitViewOptionsForm()" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_go)" src="/geo/img/buttons/go_button.gif"></td>
+</tr></table></td></tr></table></td>
+</tr></table></form>
+    <table><tr><td><table cellpadding="2" cellspacing="0" width="600"><tr bgcolor="#cccccc" valign="top"><td colspan="2"><table width="600"><tr><td><strong class="acc" id="GSE113405"><a href="/geo/query/acc.cgi?acc=GSE113405" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_recenter)">Series GSE113405</a></strong></td>
+<td></td>
+<td align="right" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_gds)"><a href="/gds/?term=GSE113405[Accession]">Query DataSets for GSE113405</a></td>
+</tr></table></td></tr>
+<tr valign="top"><td>Status</td>
+<td>Public on Oct 08, 2018</td>
+</tr>
+<tr valign="top"><td nowrap>Title</td>
+<td style="text-align: justify">HepG2 Hi-C</td>
+</tr>
+<tr valign="top"><td nowrap>Organism</td>
+<td><a href="/Taxonomy/Browser/wwwtax.cgi?mode=Info&amp;id=9606" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_organismus)">Homo sapiens</a></td>
+</tr>
+<tr valign="top"><td nowrap>Experiment type</td>
+<td>Other<br></td>
+</tr>
+<tr valign="top"><td nowrap>Summary</td>
+<td style="text-align: justify">Partially methylated domains, PMDs, are extended regions in the genome exhibiting a reduced average DNA-methylation level. PMDs cover gene-poor and transcriptionally inactive regions and tend to be heterochromatic. Here, we present a first comprehensive comparative analysis of PMDs across 171 and 24 WGBS methylomes of human and mouse cells, respectively, providing a deep insight into structural and functional features associated with PMDs.<br></td>
+</tr>
+<tr valign="top"><td nowrap>&nbsp;</td>
+<td></td>
+</tr>
+<tr valign="top"><td nowrap>Overall design</td>
+<td style="text-align: justify">Integrative analysis of partially methylated domains across 171 human and 24 mouse WGBS data sets<br>See samples_IDs.xlsx for details on the 171 human and 24 mice datasets<br></td>
+</tr>
+<tr valign="top"><td nowrap>&nbsp;</td>
+<td></td>
+</tr>
+<tr valign="top"><td>Contributor(s)</td>
+<td><a href="/pubmed/?term=Walter J[Author]">Walter J</a>, <a href="/pubmed/?term=Manke T[Author]">Manke T</a></td>
+</tr>
+<tr valign="top"><td nowrap>Citation(s)</td>
+<td><span class="pubmed_id" id="30266094"><a href="/pubmed/30266094">30266094</a></span></td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td>Submission date</td>
+<td>Apr 19, 2018</td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td>Last update date</td>
+<td>Mar 26, 2019</td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td>Contact name</td>
+<td>Abdulrahman Salhab</td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td nowrap>E-mail(s)</td>
+<td><a href="mailto:s9absalh@stud.uni-saarland.de">s9absalh@stud.uni-saarland.de</a><br></td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td nowrap>Organization name</td>
+<td style="text-align: justify">Saarland university<br></td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td nowrap>Department</td>
+<td style="text-align: justify">Genetics<br></td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td nowrap>Street address</td>
+<td style="text-align: justify">campus Saarbrücken<br></td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td nowrap>City</td>
+<td style="text-align: justify">Saarbrücken</td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td nowrap>ZIP/Postal code</td>
+<td style="text-align: justify">66123</td>
+</tr>
+<tr bgcolor="#eeeeee" valign="top"><td nowrap>Country</td>
+<td style="text-align: justify">Germany</td>
+</tr>
+<tr valign="top"><td nowrap>&nbsp;</td>
+<td></td>
+</tr>
+<tr valign="top"><td>Platforms (1)</td>
+<td onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_recenter)"><table cellpadding="3" style="position:relative;top:-5px;left:-5px"><tr><td valign="top"><a href="/geo/query/acc.cgi?acc=GPL18573" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_recenter)">GPL18573</a></td>
+<td valign="top">Illumina NextSeq 500 (Homo sapiens)</td>
+</tr></table></td>
+</tr>
+<tr valign="top"><td>Samples (1)</td>
+<td onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_recenter)"><table cellpadding="3" style="position:relative;top:-5px;left:-5px"><tr><td valign="top"><a href="/geo/query/acc.cgi?acc=GSM3105137" onmouseout="onLinkOut('HelpMessage' , geo_empty_help)" onmouseover="onLinkOver('HelpMessage' , geoaxema_recenter)">GSM3105137</a></td>
+<td valign="top">Hi-C_HepG2</td>
+</tr></table></td>
+</tr>
+<tr valign="top"><td colspan="2"><strong>Relations</strong></td></tr>
+<tr valign="top"><td>BioProject</td>
+<td><a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA451031">PRJNA451031</a></td>
+</tr>
+<tr valign="top"><td>SRA</td>
+<td><a href="https://www.ncbi.nlm.nih.gov/sra?term=SRP141229">SRP141229</a></td>
+</tr>
+</table>
+<br><span id="geo2r"></span><table cellspacing="3" width="600"><tr bgcolor="#eeeeee"><td><strong>Download family</strong></td>
+<td><strong>Format</strong></td>
+</tr>
+<tr><td><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/soft/" target="_blank">SOFT formatted family file(s)</a></td>
+<td>SOFT<a href="javascript:RPopUpWindow_Set(geoaxema_famsoft,260,120,'','','#E1EAE6','','#538AA9','MessageBox2');" onmouseout="RPopUpWindow_Stop()"><img alt="Help" height="11" src="/coreweb/images/long_help4.gif" style="border: none" width="19"></a></td>
+</tr>
+<tr><td><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/miniml/" target="_blank">MINiML formatted family file(s)</a></td>
+<td>MINiML<a href="javascript:RPopUpWindow_Set(geoaxema_famminiml,260,120,'','','#E1EAE6','','#538AA9','MessageBox2');" onmouseout="RPopUpWindow_Stop()"><img alt="Help" height="11" src="/coreweb/images/long_help4.gif" style="border: none" width="19"></a></td>
+</tr>
+<tr><td><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/matrix/" target="_blank">Series Matrix File(s)</a></td>
+<td>TXT<a href="javascript:RPopUpWindow_Set(geoaxema_fammatrix,260,210,'','','#E1EAE6','','#538AA9','MessageBox2');" onmouseout="RPopUpWindow_Stop()"><img alt="Help" height="11" src="/coreweb/images/long_help4.gif" style="border: none" width="19"></a></td>
+</tr>
+</table>
+<br><table cellpadding="2" cellspacing="2" width="600"><tr bgcolor="#eeeeee" valign="top"><td align="middle" bgcolor="#CCCCCC"><strong>Supplementary file</strong></td>
+<td align="middle" bgcolor="#CCCCCC"><strong>Size</strong></td>
+<td align="middle" bgcolor="#CCCCCC"><strong>Download</strong></td>
+<td align="middle" bgcolor="#CCCCCC"><strong>File type/resource</strong></td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_41_Hf01_LiHe_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2575495">2.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F41%5FHf01%5FLiHe%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F41%5FHf01%5FLiHe%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_41_Hf02_LiHe_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2396698">2.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F41%5FHf02%5FLiHe%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F41%5FHf02%5FLiHe%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_41_Hf03_LiHe_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2103274">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F41%5FHf03%5FLiHe%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F41%5FHf03%5FLiHe%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_43_Hm01_BlMo_Ct_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2354787">2.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm01%5FBlMo%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm01%5FBlMo%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_43_Hm03_BlMa_Ct_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2365440">2.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm03%5FBlMa%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm03%5FBlMa%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_43_Hm03_BlMa_TE_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2401536">2.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm03%5FBlMa%5FTE%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm03%5FBlMa%5FTE%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_43_Hm03_BlMa_TO_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2441731">2.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm03%5FBlMa%5FTO%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm03%5FBlMa%5FTO%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_43_Hm03_BlMo_Ct_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2404485">2.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm03%5FBlMo%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm03%5FBlMo%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_43_Hm05_BlMa_Ct_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2372042">2.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm05%5FBlMa%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm05%5FBlMa%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_43_Hm05_BlMa_TE_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2420191">2.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm05%5FBlMa%5FTE%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm05%5FBlMa%5FTE%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_43_Hm05_BlMa_TO_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2423500">2.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm05%5FBlMa%5FTO%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm05%5FBlMa%5FTO%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_43_Hm05_BlMo_Ct_WGBS_E_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2366296">2.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F43%5FHm05%5FBlMo%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F43%5FHm05%5FBlMo%5FCt%5FWGBS%5FE%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_51_Hf03_BlCM_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1585331">1.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F51%5FHf03%5FBlCM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F51%5FHf03%5FBlCM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_51_Hf03_BlEM_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1686870">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F51%5FHf03%5FBlEM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F51%5FHf03%5FBlEM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_51_Hf03_BlTN_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1355687">1.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F51%5FHf03%5FBlTN%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F51%5FHf03%5FBlTN%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_51_Hf04_BlCM_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1578904">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F51%5FHf04%5FBlCM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F51%5FHf04%5FBlCM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_51_Hf04_BlEM_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1674073">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F51%5FHf04%5FBlEM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F51%5FHf04%5FBlEM%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_51_Hf04_BlTN_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1604041">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F51%5FHf04%5FBlTN%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F51%5FHf04%5FBlTN%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_51_Hf05_BlTA_Ct_WGBS_S_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1575247">1.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5F51%5FHf05%5FBlTA%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5F51%5FHf05%5FBlTA%5FCt%5FWGBS%5FS%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Bcell_gc_TO_G201.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1493818">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fgc%5FTO%5FG201%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fgc%5FTO%5FG201%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Bcell_gc_TO_GC_T14_10.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1528294">1.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fgc%5FTO%5FGC%5FT14%5F10%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fgc%5FTO%5FGC%5FT14%5F10%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Bcell_gc_TO_GC_T14_11.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1506499">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fgc%5FTO%5FGC%5FT14%5F11%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fgc%5FTO%5FGC%5FT14%5F11%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Bcell_mem_VB_C003JB51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1209258">1.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fmem%5FVB%5FC003JB51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fmem%5FVB%5FC003JB51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Bcell_mem_VB_C003N351.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1270321">1.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fmem%5FVB%5FC003N351%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fmem%5FVB%5FC003N351%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Bcell_mem_VB_S004P151.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1283895">1.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fmem%5FVB%5FS004P151%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fmem%5FVB%5FS004P151%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Bcell_mem_VB_S017RE51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1642095">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fmem%5FVB%5FS017RE51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fmem%5FVB%5FS017RE51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Bcell_mem_VB_csMBC_NC11_41.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1659133">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fmem%5FVB%5FcsMBC%5FNC11%5F41%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fmem%5FVB%5FcsMBC%5FNC11%5F41%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Bcell_naive_CB_C003K951.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1271556">1.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fnaive%5FCB%5FC003K951%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fnaive%5FCB%5FC003K951%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Bcell_naive_CB_C0068L51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1303554">1.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fnaive%5FCB%5FC0068L51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fnaive%5FCB%5FC0068L51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Bcell_naive_VB_S00DM851.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1001091">977.6 Kb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fnaive%5FVB%5FS00DM851%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fnaive%5FVB%5FS00DM851%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Bcell_naive_VB_S01ECGA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1563774">1.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FBcell%5Fnaive%5FVB%5FS01ECGA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FBcell%5Fnaive%5FVB%5FS01ECGA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_CD4_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1574442">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FCD4%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FCD4%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_CD4_2.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1672659">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FCD4%5F2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FCD4%5F2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_CD8_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1447896">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FCD8%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FCD8%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_CD8_2.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1631221">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FCD8%5F2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FCD8%5F2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_ColonEpithCtrl.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2195806">2.1 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FColonEpithCtrl%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FColonEpithCtrl%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_ColonEpithDSS.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1962432">1.9 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FColonEpithDSS%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FColonEpithDSS%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_ColonEpithDSSandAOM.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1989026">1.9 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FColonEpithDSSandAOM%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FColonEpithDSSandAOM%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_DC_CB_S00CP651.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1423408">1.4 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5FCB%5FS00CP651%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5FCB%5FS00CP651%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_DC_CB_S00D7151.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1615803">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5FCB%5FS00D7151%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5FCB%5FS00D7151%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_DC_immat_VB_S00TU2A1_gm_csf_il4.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2314430">2.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5Fimmat%5FVB%5FS00TU2A1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5Fimmat%5FVB%5FS00TU2A1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_DC_immat_VB_S00TV0A1_gm_csf_il4.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2359609">2.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5Fimmat%5FVB%5FS00TV0A1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5Fimmat%5FVB%5FS00TV0A1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_DC_immat_VB_S00TWZA1_gm_csf_il4.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2246745">2.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5Fimmat%5FVB%5FS00TWZA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5Fimmat%5FVB%5FS00TWZA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_DC_mat_VB_S00TXXA1_gm_csf_il4.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2261614">2.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5Fmat%5FVB%5FS00TXXA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5Fmat%5FVB%5FS00TXXA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_DC_mat_VB_S00TYVA1_gm_csf_il4.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2362819">2.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5Fmat%5FVB%5FS00TYVA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5Fmat%5FVB%5FS00TYVA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_DC_mat_VB_S00U0LA1_gm_csf_il4.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1744071">1.7 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FDC%5Fmat%5FVB%5FS00U0LA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FDC%5Fmat%5FVB%5FS00U0LA1%5Fgm%5Fcsf%5Fil4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Endo_prog_VB_S00UJK51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2571070">2.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEndo%5Fprog%5FVB%5FS00UJK51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEndo%5Fprog%5FVB%5FS00UJK51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Endo_prog_VB_S01GU951.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2480809">2.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEndo%5Fprog%5FVB%5FS01GU951%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEndo%5Fprog%5FVB%5FS01GU951%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Endo_prol_CB_S00BJM51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1461115">1.4 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEndo%5Fprol%5FCB%5FS00BJM51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEndo%5Fprol%5FCB%5FS00BJM51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Endo_prol_CB_S00DCS51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1576717">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEndo%5Fprol%5FCB%5FS00DCS51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEndo%5Fprol%5FCB%5FS00DCS51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Endo_rest_CB_S00BJM52.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1731961">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEndo%5Frest%5FCB%5FS00BJM52%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEndo%5Frest%5FCB%5FS00BJM52%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Endo_rest_CB_S00DCS53.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1486876">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEndo%5Frest%5FCB%5FS00DCS53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEndo%5Frest%5FCB%5FS00DCS53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Eosi_mat_VB_S006XE53.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1685869">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEosi%5Fmat%5FVB%5FS006XE53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEosi%5Fmat%5FVB%5FS006XE53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Eosi_mat_VB_S00V6553.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2352052">2.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FEosi%5Fmat%5FVB%5FS00V6553%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FEosi%5Fmat%5FVB%5FS00V6553%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_FrCoGliaS00bPos.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2259234">2.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FFrCoGliaS00bPos%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FFrCoGliaS00bPos%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_FrCoMale1Wk.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1981571">1.9 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FFrCoMale1Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FFrCoMale1Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_FrCoMale2Wk.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2076630">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FFrCoMale2Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FFrCoMale2Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_FrCoNonNeuronFemale12Mo.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2510946">2.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FFrCoNonNeuronFemale12Mo%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FFrCoNonNeuronFemale12Mo%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_FrCoNonNeuronFemale6Wk.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1666303">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FFrCoNonNeuronFemale6Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FFrCoNonNeuronFemale6Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_FrCoNonNeuronMale7Wk.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2105847">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FFrCoNonNeuronMale7Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FFrCoNonNeuronMale7Wk%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_GI_CLN_SIG.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1851524">1.8 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FGI%5FCLN%5FSIG%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FGI%5FCLN%5FSIG%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_GI_ESO.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1889775">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FGI%5FESO%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FGI%5FESO%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_GI_STMC_GAST.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2178070">2.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FGI%5FSTMC%5FGAST%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FGI%5FSTMC%5FGAST%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_GI_S_INT.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1519291">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FGI%5FS%5FINT%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FGI%5FS%5FINT%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_HRT_ATR_R.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2111066">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FHRT%5FATR%5FR%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FHRT%5FATR%5FR%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_HRT_VENT_L.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1879209">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FHRT%5FVENT%5FL%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FHRT%5FVENT%5FL%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_HRT_VNT_R.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1948448">1.9 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FHRT%5FVNT%5FR%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FHRT%5FVNT%5FR%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Intestine.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1725583">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FIntestine%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FIntestine%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_IntestineSC.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1891700">1.8 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FIntestineSC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FIntestineSC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Keratinocytes.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1971069">1.9 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FKeratinocytes%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FKeratinocytes%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_LIV_ADLT.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1893908">1.8 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FLIV%5FADLT%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FLIV%5FADLT%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f0_CB_S00BHQ51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1393983">1.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FCB%5FS00BHQ51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FCB%5FS00BHQ51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f0_CB_S00DVR51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1418265">1.4 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FCB%5FS00DVR51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FCB%5FS00DVR51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f0_VB_C005VG51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1489508">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FVB%5FC005VG51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FVB%5FC005VG51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f0_VB_S001S751.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1635237">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FVB%5FS001S751%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FVB%5FS001S751%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f0_VB_S0022I51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1646608">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FVB%5FS0022I51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FVB%5FS0022I51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f0_VB_S0039051.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1708628">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FVB%5FS0039051%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FVB%5FS0039051%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f0_VB_S00V3BN1_t6days_unt.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1594287">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FVB%5FS00V3BN1%5Ft6days%5Funt%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FVB%5FS00V3BN1%5Ft6days%5Funt%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f0_VB_S00V49N1_t6days_b_g.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1681691">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff0%5FVB%5FS00V49N1%5Ft6days%5Fb%5Fg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff0%5FVB%5FS00V49N1%5Ft6days%5Fb%5Fg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f1_CB_S0018A52.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1465953">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff1%5FCB%5FS0018A52%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff1%5FCB%5FS0018A52%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f1_CB_S007SK51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1530813">1.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff1%5FCB%5FS007SK51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff1%5FCB%5FS007SK51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f1_VB_S001MJ51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1656960">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff1%5FVB%5FS001MJ51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff1%5FVB%5FS001MJ51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f1_VB_S001S753.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1621985">1.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff1%5FVB%5FS001S753%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff1%5FVB%5FS001S753%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f1_VB_S0022I53.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1615334">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff1%5FVB%5FS0022I53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff1%5FVB%5FS0022I53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f1_VB_S00H6O51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1834785">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff1%5FVB%5FS00H6O51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff1%5FVB%5FS00H6O51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f2_CB_S00E8W51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1991507">1.9 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff2%5FCB%5FS00E8W51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff2%5FCB%5FS00E8W51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f2_VB_S0062252.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1962361">1.9 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff2%5FVB%5FS0062252%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff2%5FVB%5FS0062252%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f2_VB_S006VI53.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1885262">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff2%5FVB%5FS006VI53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff2%5FVB%5FS006VI53%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mac_f2_VB_S00BS451.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1726343">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff2%5FVB%5FS00BS451%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff2%5FVB%5FS00BS451%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mac_f2_VB_S00FTN51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1752273">1.7 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMac%5Ff2%5FVB%5FS00FTN51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMac%5Ff2%5FVB%5FS00FTN51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_CB_C005PS51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1822281">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FCB%5FC005PS51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FCB%5FC005PS51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_CB_S000RD54.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2046398">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FCB%5FS000RD54%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FCB%5FS000RD54%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_C000S5A1bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2066508">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FC000S5A1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FC000S5A1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_C0010KA2bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2099015">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FC0010KA2bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FC0010KA2bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_C001UYA3bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1989368">1.9 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FC001UYA3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FC001UYA3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_C004SQ51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1930639">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FC004SQ51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FC004SQ51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S00V2DN1_t0days.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1634089">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS00V2DN1%5Ft0days%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS00V2DN1%5Ft0days%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01B47A1_attached_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2109280">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01B47A1%5Fattached%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01B47A1%5Fattached%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S01B55A1_rpmi_t1hr.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2053931">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01B55A1%5Frpmi%5Ft1hr%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01B55A1%5Frpmi%5Ft1hr%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01B63A1_rpmi_lps_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2147144">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01B63A1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01B63A1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S01B71A1_rpmi_bg_t1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2135207">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01B71A1%5Frpmi%5Fbg%5Ft1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01B71A1%5Frpmi%5Fbg%5Ft1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01B9YA1_rpmi_t4hrs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2112237">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01B9YA1%5Frpmi%5Ft4hrs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01B9YA1%5Frpmi%5Ft4hrs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S01BAWA1_rpmi_lps_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2149135">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BAWA1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BAWA1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01BBUA1_rpmi_bg_t4.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2076097">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BBUA1%5Frpmi%5Fbg%5Ft4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BBUA1%5Frpmi%5Fbg%5Ft4%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S01BCSA1_rpmi_t24hr.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2137654">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BCSA1%5Frpmi%5Ft24hr%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BCSA1%5Frpmi%5Ft24hr%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01BDQA1_rpmi_lps_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2077330">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BDQA1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BDQA1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S01BEOA1_rpmi_bg_t2.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2155735">2.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BEOA1%5Frpmi%5Fbg%5Ft2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BEOA1%5Frpmi%5Fbg%5Ft2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01BFMA1_rpmi_t6day.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1739328">1.7 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BFMA1%5Frpmi%5Ft6day%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BFMA1%5Frpmi%5Ft6day%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S01BGKA1_rpmi_lps_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2045246">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BGKA1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BGKA1%5Frpmi%5Flps%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01BHIA1_rpmi_bg_t2.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2171888">2.1 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01BHIA1%5Frpmi%5Fbg%5Ft2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01BHIA1%5Frpmi%5Fbg%5Ft2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Mono_VB_S01E03A1_none.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2338830">2.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01E03A1%5Fnone%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01E03A1%5Fnone%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Mono_VB_S01MAPA1_none.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1811510">1.7 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FMono%5FVB%5FS01MAPA1%5Fnone%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FMono%5FVB%5FS01MAPA1%5Fnone%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_NK_CB_C0067N51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1433277">1.4 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNK%5FCB%5FC0067N51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNK%5FCB%5FC0067N51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_NK_CB_S01E8O51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1868167">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNK%5FCB%5FS01E8O51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNK%5FCB%5FS01E8O51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_NK_VB_C002CTA1bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1397882">1.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNK%5FVB%5FC002CTA1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNK%5FVB%5FC002CTA1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_NK_VB_C006G551.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1341741">1.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNK%5FVB%5FC006G551%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNK%5FVB%5FC006G551%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_band_BM_S00JGXA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1803644">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fband%5FBM%5FS00JGXA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fband%5FBM%5FS00JGXA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_band_BM_S00JMLA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1641722">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fband%5FBM%5FS00JMLA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fband%5FBM%5FS00JMLA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_band_BM_S00VEQA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1852946">1.8 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fband%5FBM%5FS00VEQA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fband%5FBM%5FS00VEQA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_mat_CB_C00184A3bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1642188">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FCB%5FC00184A3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FCB%5FC00184A3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_mat_CB_C004GD51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1910400">1.8 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FCB%5FC004GD51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FCB%5FC004GD51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_mat_VB_C000S5A2bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2409067">2.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FC000S5A2bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FC000S5A2bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_mat_VB_C0010KA1bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2233850">2.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FC0010KA1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FC0010KA1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_mat_VB_C0011IA3bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2027111">1.9 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FC0011IA3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FC0011IA3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_mat_VB_C001UYA1bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2126715">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FC001UYA1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FC001UYA1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_mat_VB_S00FWHA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1918847">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FS00FWHA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FS00FWHA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_mat_VB_S00FXFA1_g_csfdex_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1707128">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FS00FXFA1%5Fg%5Fcsfdex%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FS00FXFA1%5Fg%5Fcsfdex%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_mat_VB_S00K5EA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1120087">1.1 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FS00K5EA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FS00K5EA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_mat_VB_S00K88A1_g_csfdex_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1944749">1.9 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FS00K88A1%5Fg%5Fcsfdex%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FS00K88A1%5Fg%5Fcsfdex%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_mat_VB_S00TC1A1_g_csfdex_t.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1868242">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmat%5FVB%5FS00TC1A1%5Fg%5Fcsfdex%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmat%5FVB%5FS00TC1A1%5Fg%5Fcsfdex%5Ft%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_meta_BM_S00JFZA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2056915">2.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmeta%5FBM%5FS00JFZA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmeta%5FBM%5FS00JFZA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_meta_BM_S00JKPA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1798687">1.7 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmeta%5FBM%5FS00JKPA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmeta%5FBM%5FS00JKPA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_meta_BM_S00VDSA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1795546">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fmeta%5FBM%5FS00VDSA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fmeta%5FBM%5FS00VDSA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_segm_BM_S00JHVA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1860532">1.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fsegm%5FBM%5FS00JHVA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fsegm%5FBM%5FS00JHVA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Neut_segm_BM_S00JNJA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1460545">1.4 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fsegm%5FBM%5FS00JNJA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fsegm%5FBM%5FS00JNJA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Neut_segm_BM_S00VFOA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1699943">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FNeut%5Fsegm%5FBM%5FS00VFOA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FNeut%5Fsegm%5FBM%5FS00VFOA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_PANC.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2586937">2.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FPANC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FPANC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_ParBasDiff.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2511507">2.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FParBasDiff%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FParBasDiff%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_ParBasMaSC.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1227691">1.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FParBasMaSC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FParBasMaSC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_ParBasProg.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2122870">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FParBasProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FParBasProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_ParLumAlve.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2447196">2.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FParLumAlve%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FParLumAlve%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_ParLumDuct.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2685217">2.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FParLumDuct%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FParLumDuct%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_ParLumProg.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2571240">2.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FParLumProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FParLumProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Plas_BM_G202.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2047892">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FPlas%5FBM%5FG202%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FPlas%5FBM%5FG202%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Plas_BM_G203.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1228663">1.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FPlas%5FBM%5FG203%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FPlas%5FBM%5FG203%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Plas_BM_bmPCs_V156.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1985737">1.9 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FPlas%5FBM%5FbmPCs%5FV156%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FPlas%5FBM%5FbmPCs%5FV156%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Plas_TO_PC_T12_20.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1816838">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FPlas%5FTO%5FPC%5FT12%5F20%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FPlas%5FTO%5FPC%5FT12%5F20%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Plas_TO_PC_T13_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2053695">2.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FPlas%5FTO%5FPC%5FT13%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FPlas%5FTO%5FPC%5FT13%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Plas_TO_PC_T14_10.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1952170">1.9 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FPlas%5FTO%5FPC%5FT14%5F10%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FPlas%5FTO%5FPC%5FT14%5F10%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_RAW.tar</td>
+<td bgcolor="#EEEEEE" title="541562880">516.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="/geo/download/?acc=GSE113405&amp;format=file">(http)</a><a id="customDl" href="">(custom)</a></td>
+<td bgcolor="#EEEEEE">TAR (of TXT)</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_SPLN.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1783456">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FSPLN%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FSPLN%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_VB_P580.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="658821">643.4 Kb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FP580%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FP580%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD4_VB_P581.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="555772">542.7 Kb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FP581%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FP581%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_VB_P582.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="588089">574.3 Kb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FP582%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FP582%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD4_VB_P583.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="731116">714.0 Kb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FP583%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FP583%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_VB_P584.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="604841">590.7 Kb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FP584%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FP584%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD4_VB_P585.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="616719">602.3 Kb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FP585%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FP585%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_VB_P586.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="547593">534.8 Kb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FP586%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FP586%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD4_VB_S007DD51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1027678">1003.6 Kb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FS007DD51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FS007DD51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_VB_S007G756.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1057624">1.0 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FS007G756%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FS007G756%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD4_VB_S008H151.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1076730">1.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FS008H151%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FS008H151%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_VB_S009W451.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1041159">1016.8 Kb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FVB%5FS009W451%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FVB%5FS009W451%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD4_cenM_VB_S006YC51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1060549">1.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FcenM%5FVB%5FS006YC51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FcenM%5FVB%5FS006YC51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_cenM_VB_S014QS55.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1526678">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FcenM%5FVB%5FS014QS55%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FcenM%5FVB%5FS014QS55%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD4_effM_VB_S001U352.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1176777">1.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FeffM%5FVB%5FS001U352%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FeffM%5FVB%5FS001U352%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD4_effM_VB_S014QS51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1626980">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD4%5FeffM%5FVB%5FS014QS51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD4%5FeffM%5FVB%5FS014QS51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD8_CB_C0066P51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="881034">860.4 Kb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FCB%5FC0066P51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FCB%5FC0066P51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD8_CB_S00C2F51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1135941">1.1 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FCB%5FS00C2F51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FCB%5FS00C2F51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD8_VB_C00256A1bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1195327">1.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FVB%5FC00256A1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FVB%5FC00256A1bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD8_VB_C003VO55.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1440576">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FVB%5FC003VO55%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FVB%5FC003VO55%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD8_cenM_VB_C003VO56.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1107526">1.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FcenM%5FVB%5FC003VO56%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FcenM%5FVB%5FC003VO56%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD8_cenM_VB_C005UI52.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1226706">1.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FcenM%5FVB%5FC005UI52%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FcenM%5FVB%5FC005UI52%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD8_effM_VB_C00256A3bs.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1176696">1.1 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FeffM%5FVB%5FC00256A3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FeffM%5FVB%5FC00256A3bs%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD8_effM_VB_S014WG51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1349453">1.3 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5FeffM%5FVB%5FS014WG51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5FeffM%5FVB%5FS014WG51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_TCD8_term_VB_S002ND51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1087084">1.0 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5Fterm%5FVB%5FS002ND51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5Fterm%5FVB%5FS002ND51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_TCD8_term_VB_S0164R51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1533729">1.5 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTCD8%5Fterm%5FVB%5FS0164R51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTCD8%5Fterm%5FVB%5FS0164R51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_THYM.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1721012">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTHYM%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTHYM%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Thym_CD3n_TH_NECH0001_1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1688085">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD3n%5FTH%5FNECH0001%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD3n%5FTH%5FNECH0001%5F1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Thym_CD3n_TH_S010NDA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1705032">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD3n%5FTH%5FS010NDA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD3n%5FTH%5FS010NDA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Thym_CD3p_TH_S010Q7A1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1681591">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD3p%5FTH%5FS010Q7A1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD3p%5FTH%5FS010Q7A1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Thym_CD3p_TH_S01G2SA1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1678094">1.6 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD3p%5FTH%5FS01G2SA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD3p%5FTH%5FS01G2SA1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Thym_CD4p_TH_NECH0001_2.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1755583">1.7 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD4p%5FTH%5FNECH0001%5F2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD4p%5FTH%5FNECH0001%5F2%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Thym_CD4p_TH_S010R5A1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1750914">1.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD4p%5FTH%5FS010R5A1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD4p%5FTH%5FS010R5A1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Thym_CD8p_TH_NECH0001_3.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1423380">1.4 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD8p%5FTH%5FNECH0001%5F3%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD8p%5FTH%5FNECH0001%5F3%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Thym_CD8p_TH_S010S3A1.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1398711">1.3 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FThym%5FCD8p%5FTH%5FS010S3A1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FThym%5FCD8p%5FTH%5FS010S3A1%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_Treg_VB_S001U353.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1129651">1.1 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTreg%5FVB%5FS001U353%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTreg%5FVB%5FS001U353%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_Treg_VB_S00XTP51.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1572658">1.5 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FTreg%5FVB%5FS00XTP51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FTreg%5FVB%5FS00XTP51%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_VAS_AOR.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2891631">2.8 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FVAS%5FAOR%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FVAS%5FAOR%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_VirBasDiff.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2779124">2.7 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FVirBasDiff%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FVirBasDiff%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_VirBasMaSC.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="1722833">1.6 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FVirBasMaSC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FVirBasMaSC%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_VirBasProg.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2297384">2.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FVirBasProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FVirBasProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_VirLumAlve.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2296481">2.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FVirLumAlve%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FVirLumAlve%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_VirLumDuct.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="2265691">2.2 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FVirLumDuct%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FVirLumDuct%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_VirLumProg.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2273572">2.2 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FVirLumProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FVirLumProg%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_cmucosa.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#DEEBDC" title="1880471">1.8 Mb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5Fcmucosa%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5Fcmucosa%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#DEEBDC">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#EEEEEE">GSE113405_colonTumor.MethylSeekR.segments.bed.gz</td>
+<td bgcolor="#EEEEEE" title="2988922">2.9 Mb</td>
+<td bgcolor="#EEEEEE"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5FcolonTumor%2EMethylSeekR%2Esegments%2Ebed%2Egz">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5FcolonTumor%2EMethylSeekR%2Esegments%2Ebed%2Egz">(http)</a></td>
+<td bgcolor="#EEEEEE">BED</td>
+</tr>
+<tr valign="top"><td bgcolor="#DEEBDC">GSE113405_samples_IDs.xlsx</td>
+<td bgcolor="#DEEBDC" title="27946">27.3 Kb</td>
+<td bgcolor="#DEEBDC"><a href="ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113405/suppl/GSE113405%5Fsamples%5FIDs%2Exlsx">(ftp)</a><a href="/geo/download/?acc=GSE113405&amp;format=file&amp;file=GSE113405%5Fsamples%5FIDs%2Exlsx">(http)</a></td>
+<td bgcolor="#DEEBDC">XLSX</td>
+</tr>
+<tr><td><a href="/Traces/study/?acc=PRJNA451031">SRA Run Selector</a><a href="javascript:RPopUpWindow_Set(geoaxema_srarun,260,120,'','','#E1EAE6','','#538AA9','MessageBox2');" onmouseout="RPopUpWindow_Stop()"><img alt="Help" height="11" src="/coreweb/images/long_help4.gif" style="border: none" width="19"></a></td></tr>
+<tr><td class="message">Raw data are available in SRA</td></tr>
+<tr><td class="message">Processed data provided as supplementary file</td></tr>
+</table>
+<span id="customDlArea"></span><br></td></tr></table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td background="/coreweb/template1/pix/main_right_bg.gif"><img src="/coreweb/template1/pix/main_right_bg.gif" width="4" height="3" alt="" border="0"></td>
+    </tr>
+    <tr>
+        <td background="/coreweb/template1/pix/but_left.gif"><img src="/coreweb/template1/pix/but_left.gif" width="4" height="4" alt="" border="0"></td>
+        <td width="10000" bgcolor="#FFFFFF" background="/coreweb/template1/pix/but_mid_bg.gif"><img src="/coreweb/template1/pix/pixel.gif" width="1" height="1" alt="" border="0"></td>
+        <td align="right" background="/coreweb/template1/pix/but_right.gif"><img src="/coreweb/template1/pix/but_right.gif" alt="" width="4" height="4" border="0"></td>
+    </tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+        <td width="99%"><img src="/coreweb/template1/pix/pixel.gif" width="1" height="1" alt="" border="0"></td><td valign="top" align="right"  nowrap>
+	        <span class="HELPBAR">|<A HREF="https://www.nlm.nih.gov"> NLM </A>|<A HREF="https://www.nih.gov" CLASS="HELPBAR"> NIH </A>|<A HREF="mailto:geo@ncbi.nlm.nih.gov" CLASS="HELPBAR"> GEO Help </A>|<A HREF="/geo/info/disclaimer.html" CLASS="HELPBAR"> Disclaimer </A>|<a href="https://www.nlm.nih.gov/accessibility.html" class="HELPBAR"> Accessibility </a>|</span><br>
+        </td>
+	</tr>
+</table>
+
+
+<map name="unlmenu">
+<area alt="NCBI Home" coords="2,0,39,15" href="/" onMouseOver="changpics(unl_menu_pix, unl_menu_home_a)" onMouseOut="changpics(unl_menu_pix, unl_menu_noa)">
+<area alt="NCBI Search" coords="40,0,91,15" href="/ncbisearch/" onMouseOver="changpics(unl_menu_pix, unl_menu_search_a)" onMouseOut="changpics(unl_menu_pix, unl_menu_noa)">
+<area alt="NCBI SiteMap" coords="92,0,143,15" href="/Sitemap/" onMouseOver="changpics(unl_menu_pix, unl_menu_sitemap_a)" onMouseOut="changpics(unl_menu_pix, unl_menu_noa)">
+</map>
+
+<script type="text/javascript" 
+  src="/portal/portal3rc.fcgi/rlib/js/InstrumentNCBIBaseJS/InstrumentPageStarterJS.js"> </script>
+</body>
+</html>
+
+

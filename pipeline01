@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# LETS GIT THIS PARTY STARTED 
+# ./pipeline01 is the way to execute this 
+
+# RETRIEVING DATA
+# Go into directory where you want your files to get downloaded to and also delete .DS_Store:
+cd /Users/oliviagallup/Desktop/Kode/Bioinf_Internship
+find . -name '.DS_Store' -type f -delete      
+
+
+# Curl writes the html content of a url input into a specified file
+curl https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE113405 > geo_PMD_file
+
+# Extract all the html links to the PMD files; this is tailored to the format of the download urls
+# in the file and doesn't work perfectly. One file is not in cut --field 6 on the grep'd line and 
+# returns customDl. First extracting urls...
+
+cat geo_PMD_file | grep "/geo/download/" | cut -d '"' -f6 > PMD_urls.txt
+
+# Unfortunately the lost URL is broken and does not lead to a download link so it will get deleted
+# ...Manually correcting for the lost URL
+# sed -e 's~customDl~/geo/download/?acc=GSE113405\&amp;format=file~g' PMD_urls.txt > PMD_urls.txt.tmp && mv PMD_urls.txt.tmp PMD_urls.txt
+sed -e 's~customDl~~g' PMD_urls.txt > PMD_urls.txt.tmp && mv PMD_urls.txt.tmp PMD_urls.txt
+
+
+# Must insert https://www.ncbi.nlm.nih.gov as a precursor to the beginning of each line / url
+sed 's~^~https://www.ncbi.nlm.nih.gov~' PMD_urls.txt > PMD_urls.txt.tmp && mv PMD_urls.txt.tmp PMD_urls.txt
+
+# Downloading the URL's to directory PMD_tracks_original
+# mkdir PMD_tracks_original
+# wget --no-check-certificate -P PMD_tracks_original -i PMD_urls.txt
+
+# Luckily the authors of the 2018 paper included Supplementary Table XLSX with sample type etc.
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6161375/bin/13059_2018_1510_MOESM1_ESM.xlsx
+# Info about cell type and consortium was taken from there and included in processing script.
+
+# The data-processing script pulls the files from the specified directory, which will be passed 
+# as the only argument. It returns data analysis about the genomes.
+python3 py_processBED.py $(pwd)"/PMD_tracks_original"
